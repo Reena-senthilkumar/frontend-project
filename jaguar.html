@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaguar Luxury Showroom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Playfair Display', serif; 
+            margin: 0;
+            padding: 0;
+            background-color:black;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #1a1a1a; s
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav a {
+            color: #444;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        .showroom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 60px;
+            justify-content: center;
+        }
+
+        .car-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .car-details {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .car-details h3 {
+            margin-bottom: 15px;
+            color: #222;
+            font-size: 1.8em;
+        }
+
+        .car-details p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .view-details {
+            background-color: #1a1a1a;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .view-details:hover {
+            background-color: #333;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Jaguar Luxury Showroom</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Models</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="showroom">
+        <div class="car-card" data-model="Jaguar F-PACE" data-price="$60,000">
+            <img src="jaguar1.jpg" alt="Jaguar F-PACE">
+            <div class="car-details">
+                <h3>Jaguar F-PACE</h3>
+                <p>Luxury SUV</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+
+        <div class="car-card" data-model="Jaguar XF" data-price="$55,000">
+            <img src="jaguar2.jpg" alt="Jaguar XF">
+            <div class="car-details">
+                <h3>Jaguar XF</h3>
+                <p>Luxury Sedan</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+
+        <div class="car-card" data-model="Jaguar F-TYPE" data-price="$80,000">
+            <img src="jaguar3.jp.jpg" alt="Jaguar F-TYPE">
+            <div class="car-details">
+                <h3>Jaguar F-TYPE</h3>
+                <p>Sports Car</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalCarName"></h2>
+            <p id="modalCarPrice"></p>
+            <p>Additional details and specifications will be shown here.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Jaguar Luxury Showroom</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $(".view-details").click(function() {
+                var carCard = $(this).closest(".car-card");
+                var model = carCard.data("model");
+                var price = carCard.data("price");
+
+                $("#modalCarName").text(model);
+                $("#modalCarPrice").text("Price: " + price);
+                $("#carModal").css("display", "block");
+            });
+
+            $(".close").click(function() {
+                $("#carModal").css("display", "none");
+            });
+
+            $(window).click(function(event) {
+                if (event.target == document.getElementById("carModal")) {
+                    $("#carModal").css("display", "none");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
