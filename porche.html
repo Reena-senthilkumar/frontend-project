@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porsche Luxury Showroom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif; /* Modern, sporty font */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000; /* Classic black */
+            color: #ffcd00; /* Porsche yellow accent */
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        nav {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+
+        .showroom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 60px;
+            justify-content: center;
+        }
+
+        .car-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .car-details {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .car-details h3 {
+            margin-bottom: 15px;
+            color: #000;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .car-details p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .view-details {
+            background-color: #ffcd00; /* Porsche yellow accent */
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .view-details:hover {
+            background-color: #ffe066;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #000;
+            color: #ffcd00; /* Porsche yellow accent */
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Porsche Luxury Showroom</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Models</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="showroom">
+        <div class="car-card" data-model="Porsche 911" data-price="$120,000">
+            <img src="porche1.jpg" alt="Porsche 911">
+            <div class="car-details">
+                <h3>Porsche 911</h3>
+                <p>Sports Car</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+
+        <div class="car-card" data-model="Porsche Cayenne" data-price="$90,000">
+            <img src="porche2.jpg" alt="Porsche Cayenne">
+            <div class="car-details">
+                <h3>Porsche Cayenne</h3>
+                <p>Luxury SUV</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+
+        <div class="car-card" data-model="Porsche Taycan" data-price="$100,000">
+            <img src="porche3.jpg" alt="Porsche Taycan">
+            <div class="car-details">
+                <h3>Porsche Taycan</h3>
+                <p>Electric Sports Car</p>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalCarName"></h2>
+            <p id="modalCarPrice"></p>
+            <p>Additional details and specifications will be shown here.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Porsche Luxury Showroom</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $(".view-details").click(function() {
+                var carCard = $(this).closest(".car-card");
+                var model = carCard.data("model");
+                var price = carCard.data("price");
+
+                $("#modalCarName").text(model);
+                $("#modalCarPrice").text("Price: " + price);
+                $("#carModal").css("display", "block");
+            });
+
+            $(".close").click(function() {
+                $("#carModal").css("display", "none");
+            });
+
+            $(window).click(function(event) {
+                if (event.target == document.getElementById("carModal")) {
+                    $("#carModal").css("display", "none");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
